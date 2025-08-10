@@ -266,3 +266,18 @@ For questions or issues:
 ---
 
 **Note**: This is a demonstration project using synthetic data. For real medical applications, use properly validated datasets and consult with medical professionals.
+
+## Frontend (Journal-style Article Layout)
+
+A static frontend mirroring a scholarly article page (header, breadcrumbs, sticky table of contents, main content, and right sidebar) is available under `frontend/`.
+
+- Open locally:
+  - Option A (Python): `python3 -m http.server 5173 --directory frontend`
+  - Then visit `http://localhost:5173/index.html`
+
+- Structure:
+  - `frontend/index.html`: Page markup
+  - `frontend/styles.css`: Layout and typography
+  - `frontend/script.js`: TOC generation, scroll spy, and basic actions
+
+You can adapt the article sections to document your AD prediction pipeline, results, and references.

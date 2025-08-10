@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Article Template</title>
+  <meta name="description" content="Article layout template mirroring a scholarly journal page with sticky TOC and sidebar." />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="site-header__inner container">
+      <div class="brand">
+        <a href="#" class="brand__link" aria-label="Home">
+          <svg class="brand__logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#111827"/><text x="16" y="21" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#fff">AI</text></svg>
+          <span class="brand__name">AD Prediction</span>
+        </a>
+      </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#" class="site-nav__item">Journal</a>
+        <a href="#" class="site-nav__item">Issues</a>
+        <a href="#" class="site-nav__item">About</a>
+      </nav>
+      <div class="site-actions">
+        <button class="btn btn--primary">Submit</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="breadcrumb container" aria-label="Breadcrumb">
+    <ol class="breadcrumb__list">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Neuroscience</a></li>
+      <li><a href="#">Articles</a></li>
+      <li aria-current="page">Template</li>
+    </ol>
+  </div>
+
+  <main class="container layout" id="main-content">
+    <aside class="toc" aria-label="Table of contents">
+      <div class="toc__inner">
+        <div class="toc__title">Contents</div>
+        <nav id="toc-nav" class="toc__nav"></nav>
+      </div>
+    </aside>
+
+    <article class="article" role="article">
+      <header class="article-header">
+        <div class="article-labels">
+          <span class="label">Research Article</span>
+          <span class="label label--accent">Open Access</span>
+        </div>
+        <h1 class="article-title">Deep learning-based early prediction of Alzheimer's disease progression</h1>
+        <div class="article-meta">
+          <div class="meta-row">
+            <div class="authors">
+              <span>Jane Doe</span>, <span>John Smith</span>, <span>Alex Johnson</span>
+            </div>
+          </div>
+          <div class="meta-row">
+            <div class="journal">Published: <time datetime="2024-06-20">20 June 2024</time> • DOI: <a href="#">10.1234/adp.2024.001</a></div>
+          </div>
+          <div class="meta-row metrics">
+            <div class="metric"><strong>5,124</strong><span>Views</span></div>
+            <div class="metric"><strong>42</strong><span>Citations</span></div>
+            <div class="metric"><strong>18</strong><span>Altmetric</span></div>
+          </div>
+        </div>
+        <div class="article-actions">
+          <a class="btn btn--ghost" href="#">Download PDF</a>
+          <button class="btn btn--ghost" data-action="cite">Cite</button>
+          <button class="btn btn--ghost" data-action="share">Share</button>
+        </div>
+      </header>
+
+      <section class="abstract" id="abstract">
+        <h2>Abstract</h2>
+        <p>
+          We present a robust pipeline for predicting Alzheimer's disease progression using multimodal biomarkers.
+          This template mirrors a scholarly layout with a sticky table of contents and a right sidebar for actions.
+        </p>
+      </section>
+
+      <section id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          Alzheimer's disease is a progressive neurodegenerative disorder. Early prediction can enable more effective
+          interventions. We outline the motivation, related work, and our contributions.
+        </p>
+        <h3>Related Work</h3>
+        <p>
+          Prior studies have explored MRI imaging, PET scans, and cognitive tests. Our approach integrates these
+          modalities using deep learning.
+        </p>
+      </section>
+
+      <section id="methods">
+        <h2>Methods</h2>
+        <h3>Dataset</h3>
+        <p>
+          We use synthetic data for demonstration. Replace this with your actual dataset description.
+        </p>
+        <h3>Model Architecture</h3>
+        <p>
+          Our model uses a multi-branch network to fuse imaging and tabular features.
+        </p>
+        <h3>Training Procedure</h3>
+        <p>
+          We adopt standard training protocols with cross-validation and calibration.
+        </p>
+      </section>
+
+      <section id="results">
+        <h2>Results</h2>
+        <p>
+          Key metrics and visualizations can be embedded here. Consider adding figures and tables.
+        </p>
+      </section>
+
+      <section id="discussion">
+        <h2>Discussion</h2>
+        <p>
+          Our findings highlight the importance of multimodal fusion and uncertainty estimation in clinical settings.
+        </p>
+      </section>
+
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          This frontend provides a clean, journal-style reading experience for your project documentation or demos.
+        </p>
+      </section>
+
+      <section id="references">
+        <h2>References</h2>
+        <ol class="references">
+          <li>Doe, J., Smith, J. (2024). Early prediction of AD progression. Journal of AI in Medicine.</li>
+          <li>Johnson, A., et al. (2023). Multimodal biomarkers for AD. NeuroImage.</li>
+        </ol>
+      </section>
+    </article>
+
+    <aside class="sidebar" aria-label="Article actions and related content">
+      <div class="card">
+        <div class="card__title">Article actions</div>
+        <div class="card__content actions">
+          <a href="#" class="action">Download PDF</a>
+          <button class="action" data-action="cite">Cite this article</button>
+          <button class="action" data-action="share">Share</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__title">Keywords</div>
+        <div class="card__content tags">
+          <span class="tag">Alzheimer's</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">Neuroimaging</span>
+          <span class="tag">Biomarkers</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__title">Related articles</div>
+        <ul class="card__list">
+          <li><a href="#">Uncertainty-aware diagnosis in neurology</a></li>
+          <li><a href="#">Combining PET and MRI for AD progression</a></li>
+          <li><a href="#">Cognitive assessments in early AD</a></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© 2025 AD Prediction Project</div>
+      <nav class="footer-nav">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
