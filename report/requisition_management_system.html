@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Requisition Management System - Project Report</title>
+    <style>
+        :root {
+            --primary: #0b5fff;
+            --text: #1b1f24;
+            --muted: #4b5563;
+            --border: #e5e7eb;
+            --accent: #f43f5e;
+        }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            color: var(--text);
+            font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.55;
+            font-size: 12.5pt;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        main { max-width: 850px; margin: 0 auto; padding: 32px 32px 64px; }
+
+        /* Headings */
+        h1, h2, h3, h4 { color: var(--text); margin: 0 0 10px; }
+        h1 { font-size: 28pt; line-height: 1.25; }
+        h2 { font-size: 18pt; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-top: 36px; }
+        h3 { font-size: 14pt; color: #111827; margin-top: 24px; }
+        h4 { font-size: 12.5pt; color: #111827; margin-top: 20px; }
+
+        p { margin: 10px 0; }
+        ul { margin: 8px 0 16px 22px; }
+        li { margin: 4px 0; }
+
+        .muted { color: var(--muted); }
+        .small { font-size: 10.5pt; }
+        .center { text-align: center; }
+        .right { text-align: right; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mt-6 { margin-top: 24px; }
+        .note { background: #f8fafc; border: 1px solid var(--border); padding: 10px 12px; border-radius: 8px; }
+
+        .cover-page {
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            background: radial-gradient(1200px 600px at 50% -50%, #e7efff 0%, transparent 60%) no-repeat;
+        }
+        .cover-card {
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+            padding: 36px 42px;
+            max-width: 820px;
+        }
+        .title {
+            font-size: 30pt;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+        .subtitle { color: var(--muted); margin-top: 4px; }
+        .meta { margin-top: 20px; }
+        .kv { margin: 6px 0; }
+        .kv span { color: var(--muted); }
+        .sign-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 32px; }
+        .sign {
+            border-top: 1px dashed var(--border);
+            padding-top: 6px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .page-break { page-break-before: always; }
+        .page { page-break-after: always; }
+
+        .toc {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            background: white;
+        }
+        .toc h3 { margin-top: 0; }
+        .toc a { color: var(--primary); text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+        .toc ol { margin: 0; padding-left: 22px; }
+        .toc li { margin: 6px 0; }
+
+        pre {
+            background: #0b1220;
+            color: #f8fafc;
+            padding: 12px 14px;
+            border-radius: 10px;
+            overflow: auto;
+            border: 1px solid #111827;
+            line-height: 1.45;
+        }
+
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+        blockquote {
+            margin: 12px 0;
+            padding: 10px 14px;
+            border-left: 4px solid var(--primary);
+            background: #f8fafc;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef2ff;
+            color: #3730a3;
+            border: 1px solid #e0e7ff;
+            border-radius: 999px;
+            padding: 2px 10px;
+            font-size: 10.5pt;
+        }
+
+        /* Print setup */
+        @page {
+            size: A4;
+            margin: 20mm 16mm 24mm;
+        }
+        @media print {
+            a[href]::after { content: ""; }
+            .page { page-break-after: always; }
+            .page-break { page-break-before: always; }
+            .cover-page { page-break-after: always; }
+            .toc { break-inside: avoid; }
+            pre { white-space: pre-wrap; }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="description" content="Requisition Management System Project Report">
+</head>
+<body>
+    <!-- Cover Page -->
+    <section class="cover-page">
+        <div class="cover-card">
+            <div class="center">
+                <div class="tag">Project Report</div>
+                <h1 class="title">REQUISITION MANAGEMENT SYSTEM</h1>
+                <div class="subtitle">Submitted for Partial Fulfillment of B.E. (Computer Science & Engineering)</div>
+            </div>
+            <div class="meta">
+                <p class="kv"><span>By:</span> [Your Name(s) Here] &nbsp; • &nbsp; <span>Reg. No.:</span> [Registration Number(s)]</p>
+                <p class="kv"><span>Department:</span> Computer Science & Engineering</p>
+                <p class="kv"><span>Institution:</span> [Your Institution/Organization], [City, Country]</p>
+                <p class="kv"><span>Month, Year:</span> [Month Year]</p>
+            </div>
+            <div class="sign-row">
+                <div class="sign">Supervisor Signature</div>
+                <div class="sign">Head of Department</div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Certificate -->
+        <section id="certificate" class="page">
+            <h2>CERTIFICATE</h2>
+            <p>
+                This is to certify that the project report entitled “REQUISITION MANAGEMENT SYSTEM” is the bona fide work of
+                [Student Names, Registration Numbers], carried out under my supervision, and submitted in partial fulfillment of the requirements for
+                the award of the degree of Bachelor of Engineering in Computer Science & Engineering.
+            </p>
+            <div class="sign-row">
+                <div>
+                    <div class="mb-2">Supervisor:</div>
+                    <div class="sign">_________________________</div>
+                </div>
+                <div>
+                    <div class="mb-2">Head of Department:</div>
+                    <div class="sign">_________________________</div>
+                </div>
+            </div>
+            <div class="sign-row">
+                <div>
+                    <div class="mb-2">Date:</div>
+                    <div class="sign">_________________________</div>
+                </div>
+                <div>
+                    <div class="mb-2">Place:</div>
+                    <div class="sign">_________________________</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Declaration -->
+        <section id="declaration" class="page">
+            <h2>DECLARATION</h2>
+            <p>
+                We hereby declare that the project work entitled “REQUISITION MANAGEMENT SYSTEM” is our own work and has not been submitted elsewhere.
+                All sources of information have been duly acknowledged and cited in this report.
+            </p>
+        </section>
+
+        <!-- Acknowledgement -->
+        <section id="acknowledgement" class="page">
+            <h2>ACKNOWLEDGEMENT</h2>
+            <p>
+                We express our sincere gratitude to [Department/Faculty Names] for their guidance and support during the execution of this project.
+                We also thank our peers and all contributors for their valuable suggestions, technical assistance, and encouragement.
+            </p>
+        </section>
+
+        <!-- Abstract -->
+        <section id="abstract" class="page">
+            <h2>ABSTRACT</h2>
+            <p>
+                This report presents a modular, workflow‑driven Requisition Management System that automates material requests and fulfillment within an organization.
+                Implemented in Microsoft Dynamics 365 Business Central using AL, the system manages the request → approval → issuance/posting lifecycle, enforces business rules,
+                ensures auditability, and exposes clear, role‑based user interfaces. The solution improves compliance, reduces data entry errors, and accelerates fulfillment compared to
+                manual requisition workflows. The document includes system design, detailed data model, user interface definitions, workflow sequences, validations, security considerations,
+                deployment guidance, test cases, and future enhancements—grounded in the included base code (Tables 50098, 50099; Pages 50230–50238, 50251).
+            </p>
+        </section>
+
+        <!-- TOC -->
+        <section id="toc" class="page">
+            <h2>TABLE OF CONTENTS</h2>
+            <div class="toc">
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#literature-review">Literature Review</a></li>
+                    <li><a href="#aim-scope">Aim &amp; Scope</a></li>
+                    <li><a href="#system-design">System Design &amp; Methodology</a>
+                        <ol>
+                            <li><a href="#architecture-overview">Architecture Overview</a></li>
+                            <li><a href="#data-model">Data Model</a></li>
+                            <li><a href="#ui-pages">User Interfaces (Pages)</a></li>
+                            <li><a href="#workflow-transitions">Workflow &amp; State Transitions</a></li>
+                            <li><a href="#business-rules">Business Rules &amp; Validations</a></li>
+                            <li><a href="#security-authorization">Security &amp; Authorization</a></li>
+                            <li><a href="#posting-inventory">Posting &amp; Inventory Movements</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#results-discussion">Results &amp; Discussion</a></li>
+                    <li><a href="#deployment-config">Deployment &amp; Configuration</a></li>
+                    <li><a href="#testing">Testing Strategy &amp; Sample Test Cases</a></li>
+                    <li><a href="#performance">Performance, Reliability &amp; Maintainability</a></li>
+                    <li><a href="#limitations-future">Limitations &amp; Future Enhancements</a></li>
+                    <li><a href="#conclusion">Summary &amp; Conclusion</a></li>
+                    <li><a href="#references">References</a></li>
+                    <li><a href="#appendices">Appendices</a></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 1. Introduction -->
+        <section id="introduction" class="page">
+            <h2>1. INTRODUCTION</h2>
+            <p>
+                Timely and well‑controlled material requisition is critical for operational efficiency. Legacy paper/email‑based processes suffer from missing information, rework,
+                long cycle times, and poor auditability. This project implements a Requisition Management System that digitizes the end‑to‑end flow—from capturing requests,
+                routing for approval, issuing from store, to final posting—using Business Central (BC) customization in AL. The solution follows standard ERP patterns (Header/Lines,
+                number series, dimensions) and integrates inventory posting via Item Journal Lines while allowing granular validations and role‑based access.
+            </p>
+            <p><strong>Key Outcomes:</strong></p>
+            <ul>
+                <li>Single source of truth for requisition data.</li>
+                <li>Enforced approvals with line‑level control of approved quantities.</li>
+                <li>Store issuance and posting with dimension propagation.</li>
+                <li>Visual cues for urgency and short‑closed documents.</li>
+                <li>Audit trail and historical views of completed requisitions.</li>
+            </ul>
+        </section>
+
+        <!-- 2. Literature Review -->
+        <section id="literature-review" class="page">
+            <h2>2. LITERATURE REVIEW</h2>
+            <ul>
+                <li><strong>Manual requisition pitfalls:</strong> fragmented communication, missing approvals, data duplication, limited traceability.</li>
+                <li><strong>ERP approach:</strong> Centralized data model (Header/Lines), controlled workflows, audit logs, and dimension‑driven analytics.</li>
+                <li><strong>Business Central &amp; AL:</strong> Provide extensibility for tables, pages, actions, triggers, and codeunits to tailor procurement/issuance flows.
+                    This project leverages BC’s standard entities (Location, Item, Item Journal Lines, Inventory Setup) and augments them with custom objects for requisition orchestration.</li>
+            </ul>
+        </section>
+
+        <!-- 3. Aim & Scope -->
+        <section id="aim-scope" class="page">
+            <h2>3. AIM &amp; SCOPE</h2>
+            <h3>3.1 Aim</h3>
+            <p>
+                Design and implement a complete, extensible Requisition Management module using BC AL that covers creation, approval, issuance, posting, and audit, with robust validations and role‑based UI.
+            </p>
+            <h3>3.2 Scope</h3>
+            <ul>
+                <li><strong>Creation:</strong> Structured header (Table 50098) and lines (Table 50099).</li>
+                <li><strong>Approval:</strong> HOD approves at line level (approved quantity), or rejects with remarks.</li>
+                <li><strong>Issuance:</strong> Store issues quantities up to approved amounts; supports lot/serial tracking.</li>
+                <li><strong>Security:</strong> Page‑level access via User Setup flags.</li>
+                <li><strong>Audit:</strong> Status, user IDs, timestamps, and remarks retained.</li>
+                <li><strong>Analytics:</strong> Dimensions (current and “New” target dimensions) for financial reporting.</li>
+            </ul>
+        </section>
+
+        <!-- 4. System Design & Methodology -->
+        <section id="system-design" class="page">
+            <h2>4. SYSTEM DESIGN &amp; METHODOLOGY</h2>
+            <h3 id="architecture-overview">4.1 Architecture Overview</h3>
+            <pre><code>+---------------------------+        +-------------------------+
+  Requester (End User)     |        |  HOD Approver           |
+  - Create/Edit Req        |        |  - Review &amp; Approve     |
+  - Send for Approval      |------->|  - Set Approved Qty     |
+---------------------------+        +-------------------------+
+                 |                                 |
+                 v                                 v
+---------------------------+        +-------------------------+
+  Store (Inventory)        |&lt;-------|  Status/Remarks updated |
+  - Release &amp; Post Issue   |        |  Audit maintained       |
+  - Assign Lots/Tracking   |        +-------------------------+
+---------------------------+
+                 |
+                 v
+---------------------------+
+  Posted / Archive Views   |
+  - Completed / Short-Closed|
+---------------------------+
+            </code></pre>
+            <p><strong>Technology Stack:</strong> Microsoft Dynamics 365 Business Central, AL language, standard BC entities (Item, Location, Item Journal Line, Inventory Setup, User Setup).</p>
+
+            <h3 id="data-model">4.2 Data Model</h3>
+            <h4>4.2.1 Table 50098 – Requisition Header (Parent)</h4>
+            <p><strong>Purpose:</strong> Stores document‑level context—who, what, where, when, and workflow state. <strong>Primary Key:</strong> No. (Code[20]).</p>
+            <h4>Core Fields &amp; Behavior</h4>
+            <ul>
+                <li><strong>No. (Code[20])</strong> – document identifier. Number Series lookup via AssistEdit.</li>
+                <li><strong>Date (Date)</strong> – set on insert to Today.</li>
+                <li><strong>Location (Code[20])</strong> – relation to Location; OnValidate → Updatelines() to sync child lines.</li>
+                <li><strong>Global Dimension 1/2, GD 3</strong> – current dimensions; on validate → Updatelines().</li>
+                <li><strong>New Global Dimension 1/2, New GD 3</strong> – target dimensions for the movement.</li>
+                <li><strong>Requisition Type</strong> (Option: Transfer) – future‑proof.</li>
+                <li><strong>Status</strong> (Option: Open, Approval For HOD, Approved) – drives UI access and actions.</li>
+                <li><strong>Priority</strong> (Option: "", Urgent, As Per Schedule) – used for styling.</li>
+                <li><strong>Required By Date (Date)</strong> – validation: Required By Date ≥ Date.</li>
+                <li><strong>Audit fields</strong> – User Id, Requested by, HOD Approval ID, ISSUED By.</li>
+                <li><strong>Completely Posted</strong> (Boolean, readonly) – set true when all lines are fully issued.</li>
+                <li><strong>Short CLosed</strong> (Boolean, readonly) &amp; Short CLose Remarks – early closure via ShortClosed().</li>
+            </ul>
+            <h4>Key Procedures &amp; Triggers</h4>
+            <ul>
+                <li><strong>OnInsert()</strong>: sets Date := Today; populates requester fields.</li>
+                <li><strong>AssistEdit(OldRH)</strong>: choose Number Series; assign next No.</li>
+                <li><strong>Updatelines()</strong>: push header fields to every line.</li>
+                <li><strong>ShortClosed()</strong>: requires remarks; removes pending Item Journal Lines; marks Short CLosed := true.</li>
+            </ul>
+
+            <h4>4.2.2 Table 50099 – Requisition Line (Child)</h4>
+            <p><strong>Purpose:</strong> Itemized request details; linked to Header via Document No. + Line No. (clustered key).</p>
+            <h4>Core Fields &amp; Behavior</h4>
+            <ul>
+                <li><strong>Document No. (Code[20])</strong> – FK to Header.No.</li>
+                <li><strong>Line No. (Integer)</strong> – unique per document; auto‑incremented.</li>
+                <li><strong>Item No. (Code[20])</strong> – relation to Item; OnValidate fills Description and UoM.</li>
+                <li><strong>Description (Text[100])</strong> – default from Item.</li>
+                <li><strong>Unit of Measure (Text[50])</strong> – default from Item’s Base UoM.</li>
+                <li><strong>Location (Code[20])</strong> – copied from header by Updatelines().</li>
+                <li><strong>Required Quantity (Decimal)</strong> – user request quantity.</li>
+                <li><strong>HOD Approved Quantity (Decimal)</strong> – approver sets; OnValidate sets Remaining Required Quantity.</li>
+                <li><strong>Quantity to Issue (Decimal)</strong> – store sets; must not exceed Remaining Required Quantity.</li>
+                <li><strong>Issued Qty. (Decimal)</strong> – cumulative issued across postings.</li>
+                <li><strong>Remaining Required Quantity (Decimal)</strong> – auto‑managed (Approved – Issued).</li>
+                <li><strong>Required By Date (Date)</strong> – copied from header; store planning.</li>
+                <li><strong>Stock In Hand (FlowField)</strong> – SUM Warehouse Entry.Quantity for Location, Item No., bin = 'MAINSTORE'.</li>
+                <li><strong>Dimensions</strong> – mirror header via Updatelines().</li>
+            </ul>
+
+            <h3 id="ui-pages">4.3 User Interfaces (Pages)</h3>
+            <h4>4.3.1 Page 50230 – Requisition List (List)</h4>
+            <ul>
+                <li>Shows active requisitions (not short‑closed and not completely posted).</li>
+                <li>CardPageId = "Requisition Card" to open detailed view.</li>
+                <li>StyleExpr = Urgent → Unfavorable; otherwise StrongBold.</li>
+            </ul>
+
+            <h4>4.3.2 Page 50231 – Requisition Card (Card)</h4>
+            <p><strong>Primary entry/edit page for headers.</strong></p>
+            <pre><code>trigger OnAfterGetRecord()
+begin
+    varEditable := true;
+    case Rec.Status of
+        Rec.Status::"Approval For HOD":
+            varEditable := false;
+        Rec.Status::Approved:
+            varEditable := false; // Only store has special editable fields on subform
+        Rec.Status::Open:
+            varEditable := true;
+    end;
+end;
+            </code></pre>
+            <p>Only one role edits at a time per workflow stage, preventing tampering or accidental overwrites.</p>
+
+            <h4>4.3.3 Page 50232 – Requisition Subform (ListPart)</h4>
+            <ul>
+                <li>Bound to Requisition Line (Table 50099); SubPageLink = Document No.=field(No.).</li>
+                <li>AutoSplitKey = true; inherits parent <code>varEditable</code>.</li>
+                <li>Open: requester edits; Approval For HOD: locked; Approved: store sets Quantity to Issue.</li>
+            </ul>
+
+            <h4>4.3.4 Pages 50233/50234/50235 – Approval Pages</h4>
+            <ul>
+                <li>List shows Status = "Approval For HOD".</li>
+                <li>Approver enters HOD Approved Quantity ≤ Requested; remarks for reductions or rejections.</li>
+                <li>On completion, Status → Approved.</li>
+            </ul>
+
+            <h4>4.3.5 Pages 50236/50237/50238 – Store Issuance &amp; Posting Pages</h4>
+            <ul>
+                <li>Approved docs: store enters Quantity to Issue.</li>
+                <li>Post generates Item Journal Lines; updates Issued/Remaining; sets Completely Posted when done.</li>
+                <li>Short Close with remarks supported.</li>
+            </ul>
+
+            <h4>4.3.6 Page 50251 – Completely Posted Requisition</h4>
+            <ul>
+                <li>Read‑only archive; filters Completely Posted = true.</li>
+                <li>Highlights Short CLosed using StyleExpr.</li>
+            </ul>
+
+            <h3 id="workflow-transitions">4.4 Workflow &amp; State Transitions</h3>
+            <ul>
+                <li><strong>Open</strong> – Requester can create/edit.</li>
+                <li><strong>Approval For HOD</strong> – Locked for requester; editable for approver.</li>
+                <li><strong>Approved</strong> – Locked for requester &amp; HOD; editable for store.</li>
+                <li><strong>Completely Posted</strong> – Read-only archive after full issuance.</li>
+                <li><strong>Short Closed</strong> – Early termination; read-only with remarks.</li>
+            </ul>
+
+            <h3 id="business-rules">4.5 Business Rules &amp; Validations</h3>
+            <h4>Header-Level (Table 50098)</h4>
+            <ul>
+                <li>No. auto‑generated via No. Series; prevents duplication; traceable.</li>
+                <li>Status default Open; only workflow changes allowed.</li>
+                <li>Location must exist; drives store processing.</li>
+                <li>Dimensions mandatory for audit; budget/report links.</li>
+                <li>Required By Date ≥ Document Date.</li>
+            </ul>
+            <h4>Line-Level (Table 50099)</h4>
+            <ul>
+                <li>Item No. must exist; description/UoM pulled automatically.</li>
+                <li>Required Quantity &gt; 0; respect inventory policy if any.</li>
+                <li>HOD Approved Quantity ≤ Required Quantity.</li>
+                <li>Quantity to Issue ≤ Remaining Required Quantity; set only when Approved.</li>
+                <li>Posting updates Issued Qty.; closes line when Issued = Approved.</li>
+                <li>Short Close requires mandatory remark.</li>
+            </ul>
+            <h4>Status Transition Validations</h4>
+            <ul>
+                <li>Open → Approval For HOD: at least one valid line.</li>
+                <li>Approval For HOD → Approved: each line has HOD Approved Quantity; remarks recorded if reduced/rejected.</li>
+                <li>Approved → Posted: each line has valid Quantity to Issue; inventory availability enforced.</li>
+                <li>Posted → Archived: auto when all issued.</li>
+            </ul>
+            <h4>Error Handling</h4>
+            <ul>
+                <li>“Required Quantity must be greater than zero.”</li>
+                <li>“Approved quantity cannot exceed requested quantity.”</li>
+                <li>“Please provide remarks when short closing a line.”</li>
+                <li>“Item %1 does not exist in the system.”</li>
+            </ul>
+
+            <h3 id="posting-inventory">4.6 Posting &amp; Inventory Movements</h3>
+            <h4>4.6.1 Store Role in Posting</h4>
+            <ul>
+                <li>Open Approved requisition; enter Quantity to Issue, Issue Bin/Location, and remarks if partial.</li>
+            </ul>
+            <h4>4.6.2 Business Rules During Posting</h4>
+            <ul>
+                <li>Check availability at Location/Bin; block if insufficient.</li>
+                <li>Issued Quantity ≤ HOD Approved Quantity.</li>
+                <li>Partial issues allowed; remaining can stay pending or be Short Closed with remarks.</li>
+                <li>After posting: set Completely Posted when all lines fully issued.</li>
+            </ul>
+            <h4>4.6.3 Integration with Item Journals</h4>
+            <ul>
+                <li>Insert Item Journal Lines with Document No., Item, Location/Bin, negative Quantity, Posting Date, Dimensions.</li>
+                <li>Post journal to create Item Ledger Entries (ILE) and Value Entries.</li>
+            </ul>
+            <h4>4.6.4 Ledger &amp; Audit Trail</h4>
+            <pre><code>Example ILE:
+Item No. = ITM-001
+Location = Main Store
+Quantity = -10
+Source Document = Requisition 5009
+            </code></pre>
+            <h4>4.6.5 Error Scenarios</h4>
+            <ul>
+                <li>Stock Not Available → block posting.</li>
+                <li>HOD Approved Qty Missing → “Cannot post. Line has no HOD Approved Quantity.”</li>
+                <li>Negative Qty Attempt → “Issued quantity must be greater than zero.”</li>
+                <li>Bin Code Missing (if mandatory) → “Please specify Bin Code before posting.”</li>
+            </ul>
+            <h4>4.6.6 Example Posting Flow</h4>
+            <pre><code>Requested: 20 Laptops
+HOD Approved: 15
+Available: 10
+Post 10 now (partial) → ILE -10; Remaining 5 pending
+Post remaining 5 later → Completely Posted → archive
+            </code></pre>
+        </section>
+
+        <!-- 4.7 Workflow & Roles, 4.8 Security, 4.9 UI/UX -->
+        <section class="page">
+            <h3 id="workflow-roles">4.7 Workflow &amp; User Roles</h3>
+            <h4>Roles</h4>
+            <ul>
+                <li><strong>Requester</strong>: Creates/edits during Open; sends for approval.</li>
+                <li><strong>HOD</strong>: Approves/rejects with line‑level quantities and remarks.</li>
+                <li><strong>Store</strong>: Issues quantities, releases, and posts; manages lots/tracking.</li>
+            </ul>
+            <h4>State Machine</h4>
+            <pre><code>Open --Send For Approval--> Approval For HOD --Approve/Reject--> Approved --Release/Post--> Completely Posted
+            </code></pre>
+            <p><strong>Short Close:</strong> Header <code>ShortClosed()</code> requires remarks, removes staged journals, marks Short CLosed.</p>
+
+            <h3 id="security-authorization">4.8 Security &amp; Authorization</h3>
+            <ul>
+                <li><strong>Page access</strong>: 50233 requires User Setup."Gen Req HOD Approval"; 50236 requires "Gen Req Store Approval".</li>
+                <li><strong>Field locking</strong>: Requester card locks on Approval For HOD; Store card allows Quantity to Issue only.</li>
+                <li><strong>Audit</strong>: User IDs and remarks captured at each transition; 50251 archive is read‑only.</li>
+            </ul>
+
+            <h3 id="ux-styling">4.9 UI/UX Cues &amp; Styling</h3>
+            <ul>
+                <li>Urgent rows → Unfavorable style; others StrongBold.</li>
+                <li>Short‑closed in archive highlighted with strong accent.</li>
+                <li>Quantity fields use sensible DecimalPlaces and min constraints.</li>
+            </ul>
+        </section>
+
+        <!-- 5 Results -->
+        <section id="results-discussion" class="page">
+            <h2>5. RESULTS &amp; DISCUSSION</h2>
+            <ul>
+                <li><strong>Cycle-time Reduction</strong>: Automated routing reduces manual follow‑ups.</li>
+                <li><strong>Data Quality</strong>: Triggers prevent inconsistent states.</li>
+                <li><strong>Traceability</strong>: Decisions/actions tied to users and timestamps.</li>
+                <li><strong>Inventory Integrity</strong>: Standard BC posting patterns ensure ledger correctness.</li>
+                <li><strong>User Feedback</strong>: Clear workflows and remaining‑qty calculations appreciated.</li>
+            </ul>
+        </section>
+
+        <!-- 6 Deployment -->
+        <section id="deployment-config" class="page">
+            <h2>6. DEPLOYMENT &amp; CONFIGURATION</h2>
+            <h3>6.1 Prerequisites</h3>
+            <ul>
+                <li>Dynamics 365 Business Central (version aligned with AL runtime).</li>
+                <li>AL dev environment (VS Code + AL extension).</li>
+                <li>Permissions to publish/install extensions.</li>
+            </ul>
+            <h3>6.2 Steps</h3>
+            <ul>
+                <li><strong>Inventory Setup</strong>: Configure "requisition No" Number Series; confirm Location/Bin policies.</li>
+                <li><strong>User Setup</strong>: HOD → "Gen Req HOD Approval"; Store → "Gen Req Store Approval".</li>
+                <li><strong>Publish &amp; Install</strong>: Package AL project; publish to sandbox, then production.</li>
+                <li><strong>Test Data</strong>: Items, Locations (and Bins), Dimension Values for Global Dimensions.</li>
+                <li><strong>Go‑Live</strong>: Validate number series; run end‑to‑end flow; train end users.</li>
+            </ul>
+        </section>
+
+        <!-- 7 Testing -->
+        <section id="testing" class="page">
+            <h2>7. TESTING STRATEGY &amp; SAMPLE TEST CASES</h2>
+            <h3>7.1 Functional Tests</h3>
+            <ul>
+                <li><strong>T1 – Create &amp; Send for Approval</strong>: Validates status change and field locks.</li>
+                <li><strong>T2 – HOD Approves</strong>: Requires HOD Approved Quantity per line.</li>
+                <li><strong>T3 – HOD Rejects</strong>: Requires rejection remarks; resets to Open.</li>
+                <li><strong>T4 – Store Issues Partially</strong>: Posts partial; updates remaining quantity.</li>
+                <li><strong>T5 – Store Completes Issue</strong>: All issued → Completely Posted.</li>
+                <li><strong>T6 – Short Close</strong>: Requires remarks; removes staged journals; flags header.</li>
+                <li><strong>T7 – Validation Guards</strong>: Blocks invalid issue qty, past required date, or missing approvals.</li>
+            </ul>
+            <h3>7.2 Negative/Edge Cases</h3>
+            <ul>
+                <li>Missing Inventory Setup number series; surface guidance.</li>
+                <li>Item changes after approval; ensure header→line sync.</li>
+                <li>Multiple postings; cleanup Item Journal Lines after post.</li>
+            </ul>
+            <h3>7.3 Performance Tests</h3>
+            <ul>
+                <li>Requisitions with 500+ lines; measure release/post time.</li>
+                <li>Index Warehouse Entry (Location Code, Item No., Bin Code) if needed.</li>
+            </ul>
+        </section>
+
+        <!-- 8 Performance -->
+        <section id="performance" class="page">
+            <h2>8. PERFORMANCE, RELIABILITY &amp; MAINTAINABILITY</h2>
+            <ul>
+                <li><strong>Indexes</strong>: Clustered on Header No. and Line Document No./Line No.</li>
+                <li><strong>Batch Posting</strong>: Release all journals; post once to minimize locks.</li>
+                <li><strong>Error Isolation</strong>: Fail‑fast guards before posting.</li>
+                <li><strong>Code Organization</strong>: Rules in table triggers + page actions; refactor to codeunits if needed.</li>
+            </ul>
+        </section>
+
+        <!-- 9 Limitations & Future Enhancements -->
+        <section id="limitations-future" class="page">
+            <h2>9. LIMITATIONS &amp; FUTURE ENHANCEMENTS</h2>
+            <h3>9.1 Current Limitations</h3>
+            <ul>
+                <li>Single‑level approval (HOD only).</li>
+                <li>Assumes standard BC lot/serial tracking.</li>
+                <li>FlowField uses hardcoded bin 'MAINSTORE' (adjust as needed).</li>
+            </ul>
+            <h3>9.2 Enhancements</h3>
+            <ul>
+                <li>Multi‑level approvals and approval matrix; integrate BC workflows.</li>
+                <li>Advanced availability (ATP) and reservation links.</li>
+                <li>Power Apps/Automate for mobile &amp; notifications.</li>
+                <li>Power BI KPIs (cycle time, approval lead time, full/partial rate).</li>
+                <li>Configurable bins; replace hardcoded bin with setup.</li>
+                <li>Reason Codes &amp; deeper GL analytics.</li>
+                <li>Document attachments for specs/drawings/quotes.</li>
+            </ul>
+        </section>
+
+        <!-- 10 Summary & Conclusion -->
+        <section id="conclusion" class="page">
+            <h2>10. SUMMARY &amp; CONCLUSION</h2>
+            <p>
+                A complete Requisition Management System on Business Central with AL:
+            </p>
+            <ul>
+                <li>Header/Lines model with strong validations.</li>
+                <li>Role‑based workflow (Requester → HOD → Store).</li>
+                <li>Posting via Item Journals ensures clean inventory &amp; cost trail.</li>
+                <li>Auditability via user IDs, statuses, required remarks.</li>
+                <li>Archive of completed and short‑closed documents for compliance.</li>
+            </ul>
+            <p>Design favors standard patterns for reliability and extensibility (multi‑level approvals, richer analytics, mobile enablement).</p>
+        </section>
+
+        <!-- References -->
+        <section id="references" class="page">
+            <h2>REFERENCES</h2>
+            <ul>
+                <li>Microsoft Docs: Business Central AL Language Reference (tables, pages, triggers, Option fields).</li>
+                <li>Business Central Development: Item Journal Posting, Dimensions, No. Series, Warehouse Entry/Item Ledger Entry design.</li>
+            </ul>
+        </section>
+
+        <!-- Appendices -->
+        <section id="appendices" class="page">
+            <h2>APPENDICES</h2>
+            <h3>Appendix A – Object Map</h3>
+            <ul>
+                <li><strong>Tables</strong>: 50098 (Requisition Header), 50099 (Requisition Line)</li>
+                <li><strong>Pages</strong>: 50230 (Requisition List), 50231 (Requisition Card), 50232 (Requisition Subform), 50233 (Requisition Approval List), 50234 (Requisition Approval Card), 50235 (Requisition Approval Subform), 50236 (General Requisition For Store), 50237 (Store Card), 50238 (Store Subform), 50251 (Completely Posted Requisition)</li>
+            </ul>
+            <h3>Appendix B – Key AL Hooks</h3>
+            <ul>
+                <li>Page 50231 → OnAfterGetRecord() sets <code>varEditable</code>.</li>
+                <li>Page 50231 → Send For Approval action (validations, status change).</li>
+                <li>Page 50234 → Approve/Reject actions (line checks, remarks, status updates).</li>
+                <li>Page 50237 → Release/Post actions (journal creation/posting; update issued/remaining; set Completely Posted).</li>
+                <li>Table 50098 → <code>Updatelines()</code> header→line sync; <code>ShortClosed()</code> early closure with remarks.</li>
+            </ul>
+            <h3>Appendix C – Sample Validation Snippets</h3>
+            <pre><code>// Header Required By Date rule
+trigger OnValidate()
+begin
+    if "Required By Date" &lt; Date then
+        Error('Required By Date cannot be before the Posting Date');
+end;
+
+// Line: HOD Approved sets remaining
+field(11; "HOD Approved Quantity"; Decimal)
+{
+    trigger OnValidate()
+    begin
+        "Remaining Required Quantity" := "HOD Approved Quantity";
+    end;
+}
+
+// Line: Store issue guard
+field(16; "Quantity to Issue"; Decimal)
+{
+    trigger OnValidate()
+    begin
+        if "Quantity to Issue" &gt; "Remaining Required Quantity" then
+            Error('Quantity To Issue Should Not Exceed Remaining Required Quantity');
+    end;
+}
+            </code></pre>
+            <h3>Appendix D – Suggested Small Improvements</h3>
+            <pre><code>// Approved ≤ Required
+trigger OnValidate()
+begin
+    if "HOD Approved Quantity" &gt; "Required Quantity" then
+        Error('Approved quantity cannot exceed requested quantity.');
+    "Remaining Required Quantity" := "HOD Approved Quantity" - "Issued Qty.";
+end;
+
+// Post updates
+// Issued Qty. += Quantity to Issue
+// Remaining Required Quantity := HOD Approved Quantity - Issued Qty.
+// Quantity to Issue := 0
+            </code></pre>
+        </section>
+    </main>
+</body>
+</html>
+
